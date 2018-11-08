@@ -3,6 +3,8 @@
     // mnemonics is populated as required by getLanguage
     var mnemonics = { "english": new Mnemonic("english") };
     var mnemonic = mnemonics["english"];
+    var factombip44 = require('factombip44');
+    console.log(factombip44)
     var seed = null;
     var bip32RootKey = null;
     var bip32ExtendedKey = null;
@@ -19,6 +21,7 @@
     var entropyChangeTimeoutEvent = null;
     var phraseChangeTimeoutEvent = null;
     var rootKeyChangedTimeoutEvent = null;
+    
 
     var generationProcesses = [];
 
@@ -902,6 +905,8 @@
                             console.log("Progressed " + p.percent.toFixed(1) + "% for index " + index);
                         });
                     }
+
+                    // console.log(factombip44.randomMnemonic())
                 }
                 // get pubkey
                 var pubkey = keyPair.getPublicKeyBuffer().toString('hex');
@@ -909,6 +914,13 @@
                 if (useHardenedAddresses) {
                     indexText = indexText + "'";
                 }
+
+                if ((netowkrs[DOM.network.val().name == "FCT - Factoid"])) {
+                    var privKeyBuffer = keyPair.d.toBuffer(32);
+                    console.log(factom.keyToPrivateFctAddress(privKeyBuffer))
+                    // privkey = privKeyBuffer.toString('hex');
+                }
+
                 // Ethereum values are different
                 if ((networks[DOM.network.val()].name == "ETH - Ethereum")
                     || (networks[DOM.network.val()].name == "ETC - Ethereum Classic")
