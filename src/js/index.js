@@ -3,8 +3,6 @@
     // mnemonics is populated as required by getLanguage
     var mnemonics = { "english": new Mnemonic("english") };
     var mnemonic = mnemonics["english"];
-    var factombip44 = require('factombip44');
-    console.log(factombip44)
     var seed = null;
     var bip32RootKey = null;
     var bip32ExtendedKey = null;
@@ -915,9 +913,20 @@
                     indexText = indexText + "'";
                 }
 
-                if ((netowkrs[DOM.network.val().name == "FCT - Factoid"])) {
+                console.log(networks[DOM.network.val()].name);
+                if (networks[DOM.network.val()].name == "FCT - Factom Factoids") {
                     var privKeyBuffer = keyPair.d.toBuffer(32);
-                    console.log(factom.keyToPrivateFctAddress(privKeyBuffer))
+                    address = factom.keyToPublicFctAddress(privKeyBuffer)
+                    privkey = factom.keyToPrivateFctAddress(privKeyBuffer)
+                    pubkey = factom.keyToPublicFctAddress(privKeyBuffer)
+                    // privkey = privKeyBuffer.toString('hex');
+                }
+
+                if (networks[DOM.network.val()].name == "EC - Factom Entry Credits") {
+                    var privKeyBuffer = keyPair.d.toBuffer(32);
+                    address = factom.keyToPublicEcAddress(privKeyBuffer)
+                    privkey = factom.keyToPrivateEcAddress(privKeyBuffer)
+                    pubkey = factom.keyToPublicEcAddress(privKeyBuffer)
                     // privkey = privKeyBuffer.toString('hex');
                 }
 
@@ -1912,6 +1921,13 @@
             },
         },
         {
+            name: "EC - Factom Entry Credits",
+            onSelect: function() {
+                network = bitcoinjs.bitcoin.networks.fujicoin;
+                setHdCoin(132);
+            },
+        },
+        {
             name: "ECN - Ecoin",
             onSelect: function() {
                 network = bitcoinjs.bitcoin.networks.ecoin;
@@ -1981,6 +1997,13 @@
             onSelect: function() {
                 network = bitcoinjs.bitcoin.networks.bitcoin;
                 setHdCoin(40);
+            },
+        },
+        {
+            name: "FCT - Factom Factoids",
+            onSelect: function() {
+                network = bitcoinjs.bitcoin.networks.fujicoin;
+                setHdCoin(131);
             },
         },
         {
