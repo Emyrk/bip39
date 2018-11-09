@@ -1,10 +1,10 @@
-# BIP39 Tool
+# BIP39 Tool -- (Modified to include Factom tokens)
 
 A tool for converting BIP39 mnemonic phrases to addresses and private keys.
 
 ## Online Version
 
-https://iancoleman.io/bip39/
+http://stevenmasley.me/bip39.html
 
 ## Standalone offline version
 
