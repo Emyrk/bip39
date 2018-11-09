@@ -916,18 +916,16 @@
                 console.log(networks[DOM.network.val()].name);
                 if (networks[DOM.network.val()].name == "FCT - Factom Factoids") {
                     var privKeyBuffer = keyPair.d.toBuffer(32);
-                    address = factom.keyToPublicFctAddress(privKeyBuffer)
                     privkey = factom.keyToPrivateFctAddress(privKeyBuffer)
-                    pubkey = factom.keyToPublicFctAddress(privKeyBuffer)
-                    // privkey = privKeyBuffer.toString('hex');
+                    address = factom.getPublicAddress(privkey)
+                    pubkey = factom.addressToRcdHash(address).toString('hex');
                 }
 
                 if (networks[DOM.network.val()].name == "EC - Factom Entry Credits") {
                     var privKeyBuffer = keyPair.d.toBuffer(32);
-                    address = factom.keyToPublicEcAddress(privKeyBuffer)
                     privkey = factom.keyToPrivateEcAddress(privKeyBuffer)
-                    pubkey = factom.keyToPublicEcAddress(privKeyBuffer)
-                    // privkey = privKeyBuffer.toString('hex');
+                    address = factom.getPublicAddress(privkey)
+                    pubkey = factom.addressToKey(address).toString('hex');
                 }
 
                 // Ethereum values are different
